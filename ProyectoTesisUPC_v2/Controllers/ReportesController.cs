@@ -505,9 +505,6 @@ namespace ProyectoTesisUPC_v2.Controllers
             string EmailOrigen = usuarioSMTP;
             string Contraseña = claveSMTP;
             string sBody = GenerateHtml(obj);
-            //string file = AppDomain.CurrentDomain.BaseDirectory.ToString() + "EmailSugerencias_v1.0.html";
-
-            //GeneraCuerpoCorreoWeb(obj, file, ref sBody);
 
             using (MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "MPRALM - Resultados del Alumno", sBody))
             {
@@ -535,20 +532,6 @@ namespace ProyectoTesisUPC_v2.Controllers
             }
 
             return blSalida;
-        }
-
-        public void GeneraCuerpoCorreoWeb(RepVerAlumnoResultadoBE obj, string file, ref string sBody)
-        {
-            try
-            {
-                StreamReader sr = new StreamReader(file);
-                sBody = sr.ReadToEnd();
-                sBody = sBody.Replace("@alumno", obj.ApellidosNombres);
-                //sBody = sBody.Replace("@Usuario", usuario);
-                //sBody = sBody.Replace("@login", login);
-                sr.Close();
-            }
-            catch (Exception) { throw; }
         }
 
         bool ValidarEmail(string email)
