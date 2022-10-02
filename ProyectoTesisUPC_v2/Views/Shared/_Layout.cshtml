@@ -1,0 +1,52 @@
+﻿@{    
+    var rol = Session["cod_rol"] == null ? "" : Session["cod_rol"].ToString();
+ }
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MPRALM</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Predicción", "Prediccion", "Prediccion")</li>
+                    <li>@Html.ActionLink("Reportes", "Reportes", "Reportes")</li>
+                    <li>@Html.ActionLink("Dashboard", "Dashboard", "Dashboard")</li>
+                    @if (rol != "C") 
+                    {
+                        <li>@Html.ActionLink("Administración", "ListarUsuarios", "Usuarios")</li>
+                    }                    
+                </ul>
+                @Html.Partial("_LoginPartial")               
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>Copyright MPRALM &copy; @DateTime.Now.Year - All Rights Reserved</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

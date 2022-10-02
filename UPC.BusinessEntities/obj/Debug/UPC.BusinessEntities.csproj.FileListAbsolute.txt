@@ -1,0 +1,10 @@
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.BusinessEntities\bin\Debug\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.BusinessEntities\bin\Debug\UPC.BusinessEntities.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.BusinessEntities\obj\Debug\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.BusinessEntities\obj\Debug\UPC.BusinessEntities.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.BusinessEntities\bin\Debug\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.BusinessEntities\bin\Debug\UPC.BusinessEntities.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.BusinessEntities\obj\Debug\UPC.BusinessEntities.csproj.AssemblyReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.BusinessEntities\obj\Debug\UPC.BusinessEntities.csproj.CoreCompileInputs.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.BusinessEntities\obj\Debug\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.BusinessEntities\obj\Debug\UPC.BusinessEntities.pdb

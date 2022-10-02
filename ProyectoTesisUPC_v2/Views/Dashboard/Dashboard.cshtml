@@ -1,0 +1,20 @@
+﻿@using ProyectoTesisUPC_v2.Models
+@model DashboardModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-8">       
+            @using (Html.BeginForm("Dashboard", "Dashboard", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {                
+                <h4>Dashboard.</h4>
+    <iframe title="PROY_BI_GRUPO1_DM_POLIZA_SPSA - Page 2" style="width:1200px; height:700px" src="https://app.powerbi.com/view?r=eyJrIjoiNTJmNmJlZTQtYjk2Mi00MTE3LWFjY2MtNWM0YTRiNGE3MzY1IiwidCI6IjBlMGNiMDYwLTA5YWQtNDlmNS1hMDA1LTY4YjliNDlhYTFmNiIsImMiOjR9" frameborder="0" allowfullscreen="true"></iframe>
+            }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

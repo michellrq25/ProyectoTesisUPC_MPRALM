@@ -1,0 +1,110 @@
+﻿@model IEnumerable<UPC.BusinessEntities.UsuarioBE>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+
+<div id="content">
+    <div class="details">
+        <div class="jtable-main-container">
+            <div class="jtable-title">
+                <div class="jtable-title-text">@ViewBag.TabTitle</div>
+            </div>
+        </div>
+        <input type="hidden" id="hdcadenacodigo" />
+        <div class="TableContainer">
+            <table class="display compact table cell-border new_table_sel" style="width:100%" id="detTable">
+                <thead>
+                    <tr>
+                        <th style="text-align:center" width="60px">Login</th>
+                        <th style="text-align:center" width="200px">Rol</th>
+                        <th style="text-align:center" width="70px">Fecha Mod.</th>
+                        <th style="text-align:center" width="60px">Documento</th>
+                        <th style="text-align:center" width="220px">Nombre y Apellido</th>
+                        <th style="text-align:center" width="80px">Accion</th>
+                    </tr>
+                </thead>
+                <tbody id="recorre" class="dataTables_scrollBody">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="80px">
+                                @Html.DisplayFor(modelItem => item.login)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="150px">
+                                @Html.DisplayFor(modelItem => item.RolBE.DescripcionRol)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="70px">
+                                @Html.DisplayFor(modelItem => item.fec_mod)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="60px">
+                                @Html.DisplayFor(modelItem => item.DNIUsuario)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="220px">
+                                @Html.DisplayFor(modelItem => item.NomUsuario) @Html.DisplayFor(modelItem => item.ApeUsuario)
+                            </td>
+                            <td class="tdicon" style="text-align:center" width="60px">
+                                @if (item.Estado == "1")
+                                {
+                                    <img src="~/Images/verde2.png" title="Habilitado" alt="" />
+                                }
+                                @if (item.Estado == "0")
+                                {
+                                    <img src="~/Images/rojo2.png" title="Inhabilitado" alt="" />
+                                }
+                                <button type="button" class="button_sel" name="btn" onclick="mostrar(@item.id_usu);" title="Editar">
+                                    <img src="~/Images/iconos/color/icono_emitir_color.png" />
+                                </button>
+                                @if (item.Estado == "1")
+                                {
+                                    <button type="button" class="button_sel" name="btn" onclick="habilitar_inhabilitar_eliminar(0, @item.id_usu,'@item.login');" title="Inhabilitar">
+                                        <img src="~/Images/trash.png" />
+                                    </button>
+                                }
+                                @if (item.Estado == "0")
+                                {
+                                    <button type="button" class="button_sel" name="btn" onclick="habilitar_inhabilitar_eliminar(1, @item.id_usu,'@item.login');" title="Habilitar">
+                                        <img src="~/Images/iconos/color/icono_agregar_color.png" />
+                                    </button>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/js/appjs/Anular/listarpartialview.js"></script>
+
+<style type="text/css">
+    .modal-dialog {
+        background-color: rgba(255, 255, 255, 0);
+        height: 590px;
+    }
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        height: auto;
+        overflow: hidden;
+    }
+
+    .modal-dialog {
+        right: auto;
+        left: 0%;
+        width: 770px;
+        padding-top: 30px;
+        padding-bottom: 5px;
+    }
+
+    .button_sel {
+        background: none;
+        border: 0;
+        padding: 0;
+    }
+
+
+
+</style>

@@ -1,0 +1,9 @@
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\bin\Release\UPC.DataAccess.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\bin\Release\UPC.DataAccess.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\bin\Release\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\bin\Release\UPC.Repositories.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\bin\Release\UPC.BusinessEntities.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\bin\Release\UPC.Repositories.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\obj\Release\UPC.DataAccess.csprojResolveAssemblyReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\obj\Release\UPC.DataAccess.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.DataAccess\obj\Release\UPC.DataAccess.pdb

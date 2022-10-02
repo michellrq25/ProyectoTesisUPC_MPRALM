@@ -1,0 +1,111 @@
+﻿@model UPC.BusinessEntities.RepVerAlumnoResultadoBE
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB">
+<head>
+    <title>MPRALM</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="" />
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+        }
+
+        body, td, table, td, tbody {
+            border-collapse: collapse;
+            text-align: center;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; border: none; ">
+    <table role="presentation" border="0" style="width:100%;background:#ffffff; max-width: 640px; border-collapse: collapse; border: none; padding: 0;display: block ">
+        <tr>
+            <td>
+                <table border="0" style="width:600px; border-collapse: collapse; border: none; padding: 0">
+                    <tr>
+                        <td style="background:#ffffff">
+                            <table style="border-collapse: collapse; border: none; padding: 0;">
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:auto;background-color:#ffffff; display: block; padding: 20px 0 0 0;">
+                            <h1 style="font-family: Arial, sans-serif;color: #7878be;font-size: 25px;line-height: 25px;font-weight: 600;padding: 0 10px;margin: 7px 0;">
+                                Estimado(a) señor(a),
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:auto;background-color:#ffffff; display: block; padding: 10px 50px 0 50px;">
+                            <p style="font-family: Arial, sans-serif;color: #7878be;font-size: 16px;line-height: 16px;font-weight: 400;padding: 0 10px;margin: 3px 0;">
+                                Se envía el informe detallado de los resultados del sistema predictivo del alumno.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color: #7878be; line-height: 20px; display: block;font-size: 16px;text-decoration: none;font-weight: 500; margin: 20px auto; text-align: left;padding: 0 60px;">
+                            
+                            <h3 style="color: #7878be">Datos Personales</h3>
+                             <span style="color: #7878be">Alumno: @Model.ApellidosNombres</span><br />
+                             <span style="color: #7878be">DNI: @Model.DNI</span><br />
+                             <span style="color: #7878be">Género:  @Model.Sexo</span><br />
+                             <span style="color: #7878be">Grado de instrucción: @Model.GradoDeInstruccion</span><br />
+                             <span style="color: #7878be">Distrito de residencia: @Model.DistritoDeResidencia</span><br />
+                             <span style="color: #7878be">Sección: @Model.Seccion</span><br />
+
+                             <h3 style="color: #7878be">Situación del Alumno</h3>
+                             <span style="color: #7878be">Según el sistema predictivo, indica que el alumno reprobará el año académico.</span>
+
+                            <h3 style="color: #7878be">Notas del alumno</h3>                            
+                            <span style="color: #7878be">PersonalSocial: @Model.Curso.PersonalSocial</span><br />
+                            <span style="color: #7878be">Educación Religiosa: @Model.Curso.EducacionReligiosa</span><br />
+                            <span style="color: #7878be">Educación Fisica: @Model.Curso.EducacionFisica</span><br />
+                            <span style="color: #7878be">Comunicación: @Model.Curso.Comunicacion</span><br />
+                            <span style="color: #7878be">Arte y Cultura: @Model.Curso.ArteYCultura</span><br />
+                            <span style="color: #7878be">Inglés: @Model.Curso.Ingles</span><br />
+                            <span style="color: #7878be">Matemática: @Model.Curso.Matematica</span><br />
+                            <span style="color: #7878be">Ciencia y Tecnología: @Model.Curso.CienciaYTecnologia</span><br />                                                                                   
+                            
+                            <h3 style="color: #7878be">Sugerencias</h3>
+                            <h3 style="color: #7878be">Cursos:</h3>
+                            @foreach (var sugerencia in Model.SugerenciaCursos)
+                            {
+                                <span style="color: #7878be">- @sugerencia.Descripcion</span>
+                                <br /><br />
+                            }                            
+                                        
+                            <h3 style="color: #7878be">Hábitos:</h3>
+                            @foreach (var sugerencia in Model.Sugerencias)
+                            {
+                                <span style="color: #7878be">@sugerencia.Nombre : @sugerencia.Descripcion</span>
+                                <br /><br />
+                            }                                
+                                                                                   
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:auto;background-color:#ffe4dd; display: block; padding: 30px 30px 30px 30px;">
+                <p style="font-family: Arial, sans-serif;color: #797985;font-size: 16px;line-height: 16px;font-weight: 300;padding: 0 10px;margin: 0;">
+                    Ante cualquier consulta favor de comunicarse con TI.
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+
+<style type="text/css">
+    .im {
+    color: #7878be;
+    }
+</style>

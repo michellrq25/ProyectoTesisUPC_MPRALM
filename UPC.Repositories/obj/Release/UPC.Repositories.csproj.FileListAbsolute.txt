@@ -1,0 +1,7 @@
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.Repositories.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.Repositories.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.BusinessEntities.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.csprojResolveAssemblyReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.dll
+C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.pdb

@@ -1,0 +1,79 @@
+﻿@using ProyectoTesisUPC_v2.Models
+@model PrediccionModel
+@{
+    ViewBag.Title = "Predicción";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.AntiForgeryToken()
+
+@using (Html.BeginForm("Prediccion", "Prediccion", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,
+    new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-6 col-lg-offset-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.ArchivoExcel)
+                @Html.TextBoxFor(d => d.ArchivoExcel, new { id = "fileExcel", @class = "form-control", type = "file", accept = ".xlsx,.xls", style = "max-width: 370px;" })
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-offset-3">
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" value="Predecir" id="btnExcel" />
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-offset-3">
+            <div class="form-group">
+                <h6 style="font-weight:bold">@(Html.Raw(HttpUtility.HtmlDecode(ViewBag.Message)))</h6>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $('#fileExcel').change(function () {
+            let fileName = this.files[0].name;
+            let extendFile = '.' + fileName.split('.').pop();
+
+            if (extendFile.toLowerCase() != '.xls' && extendFile.toLowerCase() != '.xlsx') {
+                alert('Debe seleccionar un archivo con formato Excel');
+                $('#fileExcel').attr('src', '');
+                $("#fileExcel").val("");
+            }
+        });
+
+        $("#btnExcel").on("click", function () {
+            if ($('#fileExcel').val() == null || $('#fileExcel').val() == '') {
+                alert('Seleccione un archivo para procesar.');
+            }
+            else {
+
+                var dataE = new FormData();
+                var excel = document.getElementById('fileExcel').files[0];
+
+                dataE.append("subFile", excel);
+
+                $.ajax({
+                    url: '/Prediccion/Prediccion',
+                    type: "POST",
+                    data: dataE,
+                    contentType: false,
+                    processData: false,
+                    dataType: false,
+                    cache: false,
+                    async: false,
+                    success: function (data) {
+                        //Aquí haces algo despues de cargar el excel
+                    }
+                });
+            }
+        });
+
+    </script>
+
+}
