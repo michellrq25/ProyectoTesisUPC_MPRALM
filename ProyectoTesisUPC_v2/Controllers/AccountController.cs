@@ -157,7 +157,7 @@ namespace ProyectoTesisUPC_v2.Controllers
             string sBody = string.Empty;
             string file = "";
 
-            file = AppDomain.CurrentDomain.BaseDirectory.ToString() + "EmailRecuperaClave_v1.0.html";
+            file = AppDomain.CurrentDomain.BaseDirectory.ToString() + "Plantillas/EmailRecuperaClave_v1.0.html";
 
             GeneraCuerpoCorreoWeb(clave, usuario, file, ref sBody);
 

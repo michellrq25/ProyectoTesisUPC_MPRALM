@@ -154,6 +154,7 @@ namespace ProyectoTesisUPC_v2.Controllers
                 {
                     objUsuario = repositoryUsuario.CargaUsuarios_ID(idUsuario);
                     Session["loginActual"] = objUsuario.login;
+                    Session["dniActual"] = objUsuario.DNIUsuario;
                 }
                 else
                 {
@@ -270,19 +271,26 @@ namespace ProyectoTesisUPC_v2.Controllers
 
                         if (Session["loginActual"].Equals(c.login))
                         {
-                            repositoryUsuario.SW_SP_ModificaUsuario(c.cod_rol, c.login,
+                            if (Session["dniActual"].Equals(c.DNIUsuario))
+                            {
+                                repositoryUsuario.SW_SP_ModificaUsuario(c.cod_rol, c.login,
                                 c.DNIUsuario, c.ApeUsuario, c.NomUsuario, c.cod_sexo, Convert.ToInt16(c.Estado),
                                 c.id_usu, email, ref MensajeError);
 
-                            if (MensajeError == "")
+                                if (MensajeError == "")
+                                {
+                                    MensajeB = "El Usuario se ha actualizado correctamente.";
+                                    status = true;
+                                }
+                            }
+                            else
                             {
-                                MensajeB = "El Usuario se ha actualizado correctamente.";
-                                status = true;
+                                MensajeB = "El DNI del Usuario ingresado no se puede modificar.";
                             }
                         }
                         else
                         {
-                            MensajeB = "El Login de Usuario ingresado no se puede modificar.";
+                            MensajeB = "El Login del Usuario ingresado no se puede modificar.";
                         }
                     }
                 }
@@ -385,7 +393,7 @@ namespace ProyectoTesisUPC_v2.Controllers
             string EmailOrigen = usuarioSMTP;
             string Contraseña = claveSMTP;
             string sBody = string.Empty;
-            string file = AppDomain.CurrentDomain.BaseDirectory.ToString() + "EmailClave_v1.0.html";
+            string file = AppDomain.CurrentDomain.BaseDirectory.ToString() + "Plantillas/EmailClave_v1.0.html";
 
             GeneraCuerpoCorreoWeb(clave, usuario, login, file, ref sBody);
 

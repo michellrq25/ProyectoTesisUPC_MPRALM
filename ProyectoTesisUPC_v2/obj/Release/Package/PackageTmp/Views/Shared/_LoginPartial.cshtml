@@ -1,0 +1,9 @@
+﻿<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a>
+            @if (@Session["descripRol"] != null && @Session["NomUsuario"] != null && @Session["ApeUsuario"] != null)
+            {@Html.Label(@Session["descripRol"].ToString() + " | " + @Session["NomUsuario"].ToString() + " " + @Session["ApeUsuario"].ToString())}
+        </a>
+    </li>
+    <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Account")</li>
+</ul>

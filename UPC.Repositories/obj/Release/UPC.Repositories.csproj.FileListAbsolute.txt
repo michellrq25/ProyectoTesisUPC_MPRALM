@@ -5,3 +5,12 @@ C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release
 C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.csprojResolveAssemblyReference.cache
 C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.dll
 C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.Repositories.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.Repositories.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.BusinessEntities.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\bin\Release\UPC.BusinessEntities.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.csproj.AssemblyReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.csproj.CoreCompileInputs.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.csproj.CopyComplete
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Repositories\obj\Release\UPC.Repositories.pdb

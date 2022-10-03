@@ -1,0 +1,107 @@
+﻿@model IEnumerable<UPC.BusinessEntities.ResultadoPrediccionBE>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+
+<div id="content">
+    <div class="details">
+        <div class="jtable-main-container">
+            <div class="jtable-title">
+                <div class="jtable-title-text">@ViewBag.TabTitle</div>
+            </div>
+        </div>
+        <input type="hidden" id="hdcadenacodigo" />
+        <input id="hdCantidadRegistrosFiltrados" type="hidden" value="@ViewBag.CantidadRegistrosFiltrados" />
+        <div class="TableContainer">
+            <table class="display compact table cell-border new_table_sel" style="width:100%" id="detTable">
+                <thead>
+                    <tr>
+                        <th style="text-align:center" width="60px">DNI</th>
+                        <th style="text-align:center" width="180px">Alumno</th>
+                        <th style="text-align:center" width="80px">Disrito de Residencia</th>
+                        <th style="text-align:center" width="70px">Grado</th>
+                        <th style="text-align:center" width="100px">Resultado</th>
+                        <th style="text-align:center" width="100px">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="recorre" class="dataTables_scrollBody">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="80px">
+                                @Html.DisplayFor(modelItem => item.DNI)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="150px">
+                                @Html.DisplayFor(modelItem => item.ApellidosNombres)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="120px">
+                                @Html.DisplayFor(modelItem => item.DistritoDeResidencia)
+                            </td>
+                            <td class="claseborde tdclass" style="border-right: 0px !important; text-align: center" width="100px">
+                                @Html.DisplayFor(modelItem => item.GradoDeInstruccion) de primaria
+                            </td>
+                            <td class="tdicon" style="text-align:center" width="40px">
+                                @if (item.Resultado == 1)
+                                {
+                                    <img src="~/Images/verde2.png" style="width:15px" title="Aprobado" alt="" />
+                                }
+                                @if (item.Resultado == 0)
+                                {
+                                    <img src="~/Images/rojo2.png" style="width:15px" title="Reprobado" alt="" />
+                                }
+                            </td>
+                            <td class="tdicon" style="text-align:center" width="80px">
+                                <button type="button" class="button_sel" name="btn" onclick="VistaPreviaAlumnoResultados(@item.DNI, @item.CodPrediccion);" title="Vista Previa">
+                                    <img src="~/Images/iconos/color/icono_emitir_color.png" style="width:18px" />
+                                </button>
+                                <button type="button" class="button_sel" name="btn" onclick="ObtenerCorreo(@item.DNI, @item.CodPrediccion);" title="Enviar Correo">
+                                    <img src="~/Images/iconos/color/icono_autoriza_color.png" style="width:18px" />
+                                </button>
+                            </td>
+                        </tr>
+}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-body">
+    <div class="col-lg-2">
+        <div class="modal fade align_center" id="verAlumno" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div id="RegistroAlumno"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/js/appjs/Anular/listarpartialview.js"></script>
+
+<style type="text/css">
+    .modal-dialog {
+        background-color: rgba(255, 255, 255, 0);
+        height: 590px;
+    }
+
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        height: auto;
+        overflow: hidden;
+    }
+
+    .modal-dialog {
+        right: auto;
+        left: 0%;
+        width: 770px;
+        padding-top: 30px;
+        padding-bottom: 5px;
+    }
+
+    .button_sel {
+        background: none;
+        border: 0;
+        padding: 0;
+        width: 25px;
+        height: 25px;
+    }
+</style>

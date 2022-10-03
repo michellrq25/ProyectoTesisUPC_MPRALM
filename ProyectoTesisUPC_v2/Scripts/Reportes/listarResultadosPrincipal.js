@@ -8,7 +8,7 @@ function ListarPorFiltro() {
         $("#tdExportarExcel").hide();
         
         var _estado = ($("select#ddlEstado").val() == '' ? '999' : $("select#ddlEstado").val());
-        var _seccion = ($("select#ddlSecciones").val() == '' ? '0' : $("input#ddlSecciones").val());
+        var _seccion = ($("select#ddlSecciones").val() == '' ? '0' : $("select#ddlSecciones").val());
         var _grado = ($("select#ddlGrados").val() == '' ? '0' : $("select#ddlGrados").val());
         $.ajax({
             url: "ListarResultadosPrincipal",
@@ -45,7 +45,7 @@ function alertValida(mensaje) {
     $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
 
     BootstrapDialog.show({
-        title: 'MPRALM',
+        title: 'Resultados de predicción',
         type: BootstrapDialog.TYPE_WARNING,
         icon: 'glyphicon glyphicon-check',
         message: $textAndPic,

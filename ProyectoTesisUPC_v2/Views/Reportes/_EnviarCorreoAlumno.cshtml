@@ -1,5 +1,7 @@
 ﻿@model UPC.BusinessEntities.RepVerAlumnoResultadoBE
 
+<script src="~/Scripts/Reportes/validacion.js"></script>
+
 <style type="text/css">
     .DynamicDialogStyle {
         background-color: #F7FAFE;
@@ -26,12 +28,34 @@
 </style>
 <script type="text/javascript">
 
+    function alertValida(mensaje) {
+        var $textAndPic = $('<div></div>');
+        $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/iconos/color/icon-warning.png" alt="" style="width: 40px;height: 40px;" ></i> ');
+        $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+
+        BootstrapDialog.show({
+            title: 'Resultados de predicción',
+            type: BootstrapDialog.TYPE_WARNING,
+            icon: 'glyphicon glyphicon-check',
+            message: $textAndPic,
+            closable: true,
+            buttons: [{
+                cssClass: 'btn-principal',
+                label: 'Ok',
+                icon: 'icono_check',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+        });
+    };
+
     function alertValidaOK(mensaje) {
         var $textAndPic = $('<div></div>');
         $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/check_green.png" alt="" style="width: 40px;height: 40px;"></i>');
         $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
         BootstrapDialog.show({
-            title: 'Mensaje',
+            title: 'Resultados de predicción',
             type: BootstrapDialog.TYPE_SUCCESS,
             icon: 'glyphicon glyphicon-check',
             message: $textAndPic,
@@ -48,10 +72,16 @@
     }
 
     $("#lnkEnviarCorreo").click(function () {
+
+        if ($('#Email').val().trim() == '') {
+            alertValida('Favor de ingresar un correo.');
+            return false;
+        }
+
         var correoEnviar = $("#Email").val();
         if (!validaCorreo(correoEnviar))
         {
-            alertModal("El formato del correo es incorrecto, favor de verificar.");
+            alertValida("El formato del correo es incorrecto, favor de verificar.");
             return;
         }
         $.ajax({
@@ -112,4 +142,3 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Reportes/validacion.js"></script>

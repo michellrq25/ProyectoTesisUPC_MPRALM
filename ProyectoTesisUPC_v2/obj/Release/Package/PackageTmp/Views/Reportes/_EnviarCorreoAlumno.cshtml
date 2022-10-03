@@ -1,0 +1,144 @@
+﻿@model UPC.BusinessEntities.RepVerAlumnoResultadoBE
+
+<script src="~/Scripts/Reportes/validacion.js"></script>
+
+<style type="text/css">
+    .DynamicDialogStyle {
+        background-color: #F7FAFE;
+        font-size: small;
+    }
+</style>
+<style type="text/css">
+    .modal-dialog {
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-dialog {
+        right: auto;
+        left: 0%;
+        width: 50%;
+        padding-top: 30px;
+        padding-bottom: 5px;
+    }
+</style>
+<script type="text/javascript">
+
+    function alertValida(mensaje) {
+        var $textAndPic = $('<div></div>');
+        $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/iconos/color/icon-warning.png" alt="" style="width: 40px;height: 40px;" ></i> ');
+        $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+
+        BootstrapDialog.show({
+            title: 'Resultados de predicción',
+            type: BootstrapDialog.TYPE_WARNING,
+            icon: 'glyphicon glyphicon-check',
+            message: $textAndPic,
+            closable: true,
+            buttons: [{
+                cssClass: 'btn-principal',
+                label: 'Ok',
+                icon: 'icono_check',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+        });
+    };
+
+    function alertValidaOK(mensaje) {
+        var $textAndPic = $('<div></div>');
+        $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/check_green.png" alt="" style="width: 40px;height: 40px;"></i>');
+        $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+        BootstrapDialog.show({
+            title: 'Resultados de predicción',
+            type: BootstrapDialog.TYPE_SUCCESS,
+            icon: 'glyphicon glyphicon-check',
+            message: $textAndPic,
+            closable: true,
+            buttons: [{
+                cssClass: 'btn-principal',
+                icon: 'icono_check',
+                label: 'Aceptar',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+        });
+    }
+
+    $("#lnkEnviarCorreo").click(function () {
+
+        if ($('#Email').val().trim() == '') {
+            alertValida('Favor de ingresar un correo.');
+            return false;
+        }
+
+        var correoEnviar = $("#Email").val();
+        if (!validaCorreo(correoEnviar))
+        {
+            alertValida("El formato del correo es incorrecto, favor de verificar.");
+            return;
+        }
+        $.ajax({
+            url: "/Reportes/EnviarCorreo",
+            type: 'Get',
+            async: true,
+            cache: false,
+            data: {
+                p_correo: correoEnviar
+            },
+            success: function (data) {
+                if (data.IsValid == false) {
+                    alertValida("<a style='font-size: 1.5em; color:#6f79bd;'>Se produjo un error inesperado.</a> <br>Si el error persiste favor de comunicarse con TI. <br>Código de Error: <b style='color:#FF6A39;'>" + data.ErrorMessage + "<b/>");
+                    return;
+                }
+                $('#verAlumno').modal('hide');
+                alertValidaOK(data.message);
+            },
+            error: function () {
+                $('#verAlumno').modal('hide');
+                alertValida("<a style='font-size: 1.5em; color:#6f79bd;'>Se produjo un error inesperado.</a> <br>Si el error persiste favor de comunicarse con TI.");
+            }
+        });
+    });
+</script>
+<div class="modalCrono" id="contenedoPrincipal"></div>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header titulo_pop_sel">
+            <button type="button" id="cerrar" class="close x_sel" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div id="Head">Envío de los resultados del alumno</div>
+            <input type="hidden" id="CodPrediccion" value="@Html.DisplayFor(model => model.CodPrediccion)" />
+        </div>
+        <div class="modal-body">
+            <table>
+                <tr>
+                    <td width="50px"></td>
+                    <td width="60px">
+                        <label for="disabledSelect2">Correo: </label>
+                    </td>
+                    <td width="250px">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control dform-control", autofocus = "autofocus" } })
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <div class="modal-footer">
+            <center>
+                <table>
+                    <tr>
+                        <td>
+                            <a id="lnkEnviarCorreo" href="#" class="btn btn-secundario"><i class="glyphicon glyphicon-send"></i>&nbsp;Enviar Resultados del Alumno</a>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+    </div>
+</div>

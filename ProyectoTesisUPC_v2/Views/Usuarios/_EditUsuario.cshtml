@@ -60,7 +60,7 @@
         $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/check_green.png" alt="" style="width: 40px;height: 40px;"></i>');
         $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
         BootstrapDialog.show({
-            title: 'Mensaje',
+            title: 'Mantenimiento de Usuarios',
             type: BootstrapDialog.TYPE_SUCCESS,
             icon: 'glyphicon glyphicon-check',
             message: $textAndPic,
@@ -81,7 +81,7 @@
         $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/iconos/color/icono-alerta.png" alt="" style="width: 40px;height: 40px;"></i>');
         $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
         BootstrapDialog.show({
-            title: 'Alerta',
+            title: 'Mantenimiento de Usuarios',
             type: BootstrapDialog.TYPE_WARNING,
             icon: 'glyphicon glyphicon-check',
             message: $textAndPic,
@@ -131,15 +131,11 @@
             return false;
         }
 
-        if ($('#login').val().trim() == '') {
-            alertValida('Favor de ingresar el login del Usuario');
-            return false;
-        }
-
         if ($('#DNIUsuario').val().trim() == '') {
             alertValida('Favor de ingresar el DNI del Usuario');
             return false;
-        }
+        }      
+                
         if ($('#ApeUsuario').val().trim() == '') {
             alertValida('Favor de ingresar el Apellido del Usuario');
             return false;
@@ -148,6 +144,12 @@
             alertValida('Favor de ingresar el Nombre del Usuario');
             return false;
         }
+
+        if ($('#login').val().trim() == '') {
+            alertValida('Favor de ingresar el login del Usuario');
+            return false;
+        }
+
         if ($('#e_mail').val().trim() == '') {
             alertValida('Favor de ingresar un correo.');
             return false;

@@ -1,0 +1,380 @@
+﻿@model UPC.BusinessEntities.UsuarioBE
+<div class="modalCrono"></div>
+<script src="~/Scripts/js/appjs/Usuarios/users.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $(".solo-numero").keypress(function (event) {
+            try {
+                var regex = new RegExp("^[0-9]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            }
+            catch (e) {
+                return;
+            }
+        });
+
+        $(".solo-letras").keypress(function (e) {
+            var key = e.keyCode || e.which,
+                tecla = String.fromCharCode(key).toLowerCase(),
+                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz'";
+
+            if (letras.indexOf(tecla) == -1) { //&& !tecla_especial
+                return false;
+            }
+        });
+
+        function SoloLetras(e) {
+            var key = e.keyCode || e.which,
+                tecla = String.fromCharCode(key).toLowerCase(),
+                letras = " áéíóúabcdefghijklmnñopqrstuvwxyz'";
+
+            if (letras.indexOf(tecla) == -1) { //&& !tecla_especial
+                return false;
+            }
+        }
+
+        $(".solo-letras-numeros").keypress(function (event) {
+            try {
+                var regex = new RegExp("^[a-zA-Z0-9]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            }
+            catch (e) {
+                return;
+            }
+        });
+    });
+
+    function alertValidaOK(mensaje) {
+        var $textAndPic = $('<div></div>');
+        $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/check_green.png" alt="" style="width: 40px;height: 40px;"></i>');
+        $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+        BootstrapDialog.show({
+            title: 'Mantenimiento de Usuarios',
+            type: BootstrapDialog.TYPE_SUCCESS,
+            icon: 'glyphicon glyphicon-check',
+            message: $textAndPic,
+            closable: true,
+            buttons: [{
+                cssClass: 'btn-principal',
+                icon: 'icono_check',
+                label: 'Aceptar',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+        });
+    }
+
+    function alertValida(mensaje) {
+        var $textAndPic = $('<div></div>');
+        $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/iconos/color/icono-alerta.png" alt="" style="width: 40px;height: 40px;"></i>');
+        $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+        BootstrapDialog.show({
+            title: 'Mantenimiento de Usuarios',
+            type: BootstrapDialog.TYPE_WARNING,
+            icon: 'glyphicon glyphicon-check',
+            message: $textAndPic,
+            closable: true,
+            buttons: [{
+                cssClass: 'btn-principal',
+                icon: 'icono_check',
+                label: 'Aceptar',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+        });
+    }
+    $("#lnkGrabar").click(function () {
+        Save();
+    });
+    $("#lnkCancelar").click(function () {
+        $("#cerrar").click();
+    });
+
+    function ListarPorFiltro() {
+        $("#usuario").val($("#login").val());
+        $.ajax({
+            url: "/Usuarios/ListarUsuariosPrincipal",
+            type: 'Get',
+            data: {
+                login: $("#login").val(),
+                DNIUsuario: "",
+                Rol: "999",
+                estado: "999"
+            },
+            async: true,
+            cache: false,
+            success: function (data) {
+                $("#divGrid").html(data);
+            },
+            error: function () {
+                alertModal("Se produjo un error al obtener los datos.");
+            }
+        });
+    }
+
+    function Save() {
+        if ($('#ddlRoles2').val().trim() == '') {
+            alertValida('Favor de seleccionar el Rol');
+            return false;
+        }
+
+        if ($('#DNIUsuario').val().trim() == '') {
+            alertValida('Favor de ingresar el DNI del Usuario');
+            return false;
+        }      
+                
+        if ($('#ApeUsuario').val().trim() == '') {
+            alertValida('Favor de ingresar el Apellido del Usuario');
+            return false;
+        }
+        if ($('#NomUsuario').val().trim() == '') {
+            alertValida('Favor de ingresar el Nombre del Usuario');
+            return false;
+        }
+
+        if ($('#login').val().trim() == '') {
+            alertValida('Favor de ingresar el login del Usuario');
+            return false;
+        }
+
+        if ($('#e_mail').val().trim() == '') {
+            alertValida('Favor de ingresar un correo.');
+            return false;
+        }
+        if (!ValidaEmail($('#e_mail').val())) {
+            alertValida('El correo ingresado no es valido.');
+            return false;
+        }
+
+        var idRol = $("#myDivTwo").data('value');
+
+        $.ajax({
+            url: "/Usuarios/Save",
+            type: 'Post',
+            data:
+            {
+                id_usu: $('#id_usu').val() == '' ? '0' : $('#id_usu').val(),
+                cod_rol: $('#ddlRoles2').val(),
+                login: $('#login').val(),
+                dniusuario: $('#DNIUsuario').val(),
+                apeusuario: $('#ApeUsuario').val(),
+                NomUsuario: $('#NomUsuario').val(),
+                cod_sexo: 'N',
+                Estado: 1,
+                email: $('#e_mail').val()
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    alertValidaOK(data.message);
+                    ListarPorFiltro();
+                    $('#id_usu').val('0');
+                }
+                else {
+                    alertValida(data.message);
+                    return false;
+                }
+            },
+            error: function () {
+                $('#msg').html('<div class="failed">Error! Please try again.</div>');
+            }
+        });
+        $("#cerrar").click();
+    }
+
+</script>
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header titulo_pop_sel">
+            <button type="button" id="cerrar" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <div id="H">Registro / Actualización de Usuario</div>
+        </div>
+        <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">Ingreso de Datos</div>
+                @Html.HiddenFor(model => model.id_usu)
+                <div class="panel-body">
+                    <div id="myDivTwo" data-value="@Request.RequestContext.HttpContext.Session["rol"]"></div>
+                    <div class="row">
+                        <table>
+                            <tr>
+                                <td width="100px">
+                                    <label class="col-lg-2 control-label" for="disabledSelect">Rol:</label>
+                                </td>
+                                <td width="250px">
+                                    @Html.DropDownList("ddlRoles", null, "--Seleccione--", htmlAttributes: new { @id = "ddlRoles2", @class = "form-control autotab wrapper-dropdown" })
+                                </td>
+                                <td width="20px"></td>
+                                <td width="100px">
+                                    <label class="col-lg-2 control-label" for="disabledSelect">DNI:</label>
+                                </td>
+                                <td width="250px">
+                                    @Html.TextBoxFor(model => model.DNIUsuario, new { @class = "form-control solo-numero", maxlength = 11 })
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table>
+                            <tr>
+                                <td width="100px">
+                                    <label class="col-lg-2 control-label" for="disabledSelect">Nombres:</label>
+                                </td>
+                                <td width="250px">
+                                    @Html.TextBoxFor(model => model.NomUsuario, new { @class = "form-control solo-letras", maxlength = 30 })
+                                </td>
+                                <td width="20px"></td>
+                                <td width="100px">
+                                    <label class="col-lg-2 control-label" for="disabledSelect">Apellidos:</label>
+                                </td>
+                                <td width="250px">
+                                    @Html.TextBoxFor(model => model.ApeUsuario, new { @class = "form-control solo-letras", maxlength = 30 })
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table>
+                            <tr>
+                                <td width="100px">
+                                    <label class="col-lg-2 control-label" for="disabledSelect">Login:</label>
+                                </td>
+                                <td width="250px">
+                                    @Html.TextBoxFor(model => model.login, new { @class = "form-control solo-letras-numeros", maxlength = 15 })
+                                </td>
+                                <td width="20px"></td>
+                                <td width="250px">
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <center>
+
+                        </center>
+                        <table>
+                            <tr>
+                                <td class="td-correo">
+                                    <label class="col-lg-2 control-label" for="disabledSelect">Correo:</label>
+                                </td>
+                                <td class="td-correo-box">
+                                    @Html.TextBoxFor(model => model.e_mail, new { @class = "form-control", maxlength = 50 })
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table class="zona-centrada">
+                            <tr>
+                                <td class="celda1">
+                                    <a id="lnkGrabar" href="#" class="btn btn-principal"><i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;Grabar</a>
+                                </td>
+                                <td class="celda2">
+                                    <a id="lnkCancelar" href="#" class="btn btn-secundario"><i class="icono_cancelar"></i>&nbsp;Cancelar</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div id="msg"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .t1 {
+        width: 100px;
+    }
+
+    .t2 {
+        width: 330px;
+    }
+
+    .t3 {
+        width: 70px;
+    }
+
+    .t4 {
+        width: 10px;
+    }
+
+    .modal-dialog {
+        background-color: rgba(255, 255, 255, 0);
+        height: 590px;
+    }
+
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        height: auto;
+        overflow: hidden;
+    }
+
+    .modal-dialog {
+        right: auto;
+        left: 0%;
+        width: 770px;
+        padding-top: 30px;
+        padding-bottom: 5px;
+    }
+
+    .wrapper-dropdown {
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    table.zona-centrada {
+        width: 100%;
+    }
+
+    .zona-centrada .celda1 {
+        width: 50%;
+        padding-right: 25px;
+        text-align: right;
+    }
+
+    .zona-centrada .celda2 {
+        width: 50%;
+        padding-left: 25px;
+        text-align: left;
+    }
+
+    .td-correo {
+        width: 100px;
+    }
+
+    .td-correo-box {
+        width: 618px;
+    }
+
+    .td-promotor {
+        width: 100px;
+    }
+
+    .td-promotor-box {
+        width: 618px;
+    }
+
+    .icono_cancelar {
+        width: 15px;
+        height: 14px;
+        background: url(../Images/iconos/color/icono_cancelar_color.png) no-repeat;
+        background-size: 100%;
+        display: inline-block;
+        /* margin-top: 0px; */
+        vertical-align: top;
+        margin-top: 2px;
+    }
+</style>

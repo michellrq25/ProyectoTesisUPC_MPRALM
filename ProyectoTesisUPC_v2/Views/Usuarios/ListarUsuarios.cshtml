@@ -18,7 +18,7 @@
             <div class="form-group">
                 <div class="col-lg-1" style="font-size: 12px; width: 160px;">
                     <label for="inp" class="inp">
-                        <input style="width:180px" type="text" id="usuario" maxlength="15" class="inptnew form-control dform-control text-box single-line" placeholder=" " />
+                        <input style="width:180px" type="text" id="usuario" maxlength="15" class="inptnew form-control dform-control text-box single-line solo-letras-numeros" placeholder=" " />
                         <span class="label" style="color:black; font-size: 12px">Usuario</span>
                         <span class="border"></span>
                     </label>
@@ -118,6 +118,21 @@
             if ($("#usuario").val() != "") {
                 $("#lnkListarUsuarios").click();
             }
+
+            $(".solo-letras-numeros").keypress(function (event) {
+                try {
+                    var regex = new RegExp("^[a-zA-Z0-9]+$");
+                    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                    if (!regex.test(key)) {
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+                catch (e) {
+                    return;
+                }
+            });
+
         });
 
     </script>

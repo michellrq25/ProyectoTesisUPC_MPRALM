@@ -1,0 +1,246 @@
+﻿@using ProyectoTesisUPC_v2.Models
+@model ReporteModel
+@{
+    ViewBag.Title = "Reportes";
+}
+
+<input id="hdVista" type="hidden" value="0" />
+<input id="hdMensaje" type="text" style="display:none" value="@ViewBag.Message" />
+<input id="hdAlerta" type="hidden" value="@ViewBag.Alerta" />
+
+
+<link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" type="text/css" />
+<div class="modalCrono" id="contenedoPrincipal"></div>
+<div style="height:20px;"></div>
+<div class="panel panel-default" style="align-content:center">
+    <div class="panel-heading">Resultado de predicción: Listado</div>
+    <div class="panel-body">
+        <div class="col-lg-12" style="padding:0px 0px 10px 0px">
+            <div class="form-group">
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        <input style="width:180px" type="text" id="dniAlumno" maxlength="11" class="inptnew form-control dform-control text-box single-line" placeholder=" " value="@ViewBag.AnioCotizacion" />
+                        <span class="label" style="color:black; font-size: 12px">DNI del Alumno</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        @Html.DropDownList("ddlSecciones", null, "--Todos--", htmlAttributes: new { @id = "ddlSecciones", @class = "form-control autotab wrapper-dropdown", style = "width:180px;" })
+                        <span class="label" style="color:black; font-size: 12px">Sección</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        @Html.DropDownList("ddlGrados", null, "--Todos--", htmlAttributes: new { @id = "ddlGrados", @class = "form-control autotab wrapper-dropdown", style = "width:180px;" })
+                        <span class="label" style="color:black; font-size: 12px">Grado</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        @Html.DropDownList("ddlEstado", null, htmlAttributes: new { @id = "ddlEstado", @class = "form-control autotab wrapper-dropdown", style = "width:180px;" })
+                        <span class="label" style="color:black; font-size: 12px">Estado</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+                <div class="col-lg-1">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="col-lg-12" style="padding:8px 0px 10px 0px">
+            <div class="form-group">
+                <label class="col-lg-12 control-label" for="disabledSelect2">@Html.Raw(ViewBag.textoFormularios)</label>
+            </div>
+        </div>
+
+        <div class="col-lg-12" style="padding:10px 0px 0px 0px">
+            <center>
+                <table class="panelMenu">
+                    <tr>
+                        <td style="padding: 0px 10px 0px 0px">
+                            <a id="lnkListarResultados" href="#" class="buttonBarra" role="button">
+                                <span>Buscar</span>
+                                <div class="iconBarra IconoBuscar">
+                                    <i class="faBarra fa-remove2"></i>
+                                </div>
+                            </a>
+                        </td>
+                        <td id="tdExportarExcel" style="display: none; padding: 0px 10px 0px 0px">
+                            <a id="lnkExportar" href="#" class="buttonBarra" role="button" onclick="ExportarExcel();">
+                                <span>Excel</span>
+                                <div class="iconBarra IconoExcel">
+                                    <i class="faBarra fa-remove2"></i>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+        <br /> <br />
+        <div class="col-lg-12" style="padding:0px 0px 10px 0px">
+            <div class="form-group">
+                <div class="block" id="divGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/Reportes/listarResultadosPrincipal.js"></script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+        if ($("#dniAlumno").val() != "") {
+            $("#lnkListarResultados").click();
+        }
+    });
+        function ExportarExcel() {
+            debugger;
+            var _estado = ($("select#ddlEstado").val() == '' ? '999' : $("select#ddlEstado").val());
+            var _seccion = ($("select#ddlSecciones").val() == '' ? '0' : $("input#ddlSecciones").val());
+            var _grado = ($("select#ddlGrados").val() == '' ? '0' : $("select#ddlGrados").val());
+            var item1 = $("input#dniAlumno").val();
+            var item2 = _seccion;
+            var item3 = _grado;
+            var item4 = _estado;
+            var Url = '@Url.Action("ExportarExcel", "Reportes", new { dniAlumno = "p1", seccion = "p2", grado = "p3", estado = "p4" })'.replace("p1", encodeURIComponent(item1));
+            Url = Url.replace("p2", encodeURIComponent(item2));
+            Url = Url.replace("p3", encodeURIComponent(item3));
+            Url = Url.replace("p4", encodeURIComponent(item4));
+            Url = Url.replace(/&amp;/g, "&");
+            window.location.href = Url;
+    }
+
+    </script>
+
+}
+<style type="text/css">
+    .IconoNuevo {
+        background: url(../Images/iconos/blanco/icono_nuevo.png) no-repeat;
+        background-position: center;
+        display: inline-block;
+    }
+
+    .IconoBuscar {
+        background: url(../Images/iconos/blanco/icono_buscar.png) no-repeat;
+        background-position: center;
+        display: inline-block;
+    }
+
+    .IconoExcel {
+        background: url(../Images/iconos/blanco/icono_excel.png) no-repeat;
+        background-position: center;
+        display: inline-block;
+    }
+
+    .buttonBarra {
+        font-family: 'Mirai_medium';
+        display: block;
+        background-color: #5f747f;
+        width: 65px;
+        height: 35px;
+        line-height: 40px;
+        margin: auto;
+        color: #fff;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 7px;
+    }
+
+        .buttonBarra span, .buttonBarra .iconBarra {
+            display: block;
+            height: 100%;
+            text-align: center;
+            position: absolute;
+            top: 0;
+        }
+
+        .buttonBarra span {
+            width: 72%;
+            line-height: 50px;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #fff;
+            left: 0;
+            left: -72%;
+            opacity: 0;
+        }
+
+        .buttonBarra .iconBarra {
+            width: 100%;
+            background-size: 18px;
+        }
+
+            .buttonBarra .iconBarra .faBarra {
+                font-size: 30px;
+                line-height: 40px;
+            }
+
+            .buttonBarra .iconBarra .fa-remove2 {
+                height: 35px;
+            }
+
+        .buttonBarra.success span, .buttonBarra:hover span {
+            left: 0%;
+            opacity: 100;
+            line-height: 35px;
+            transition: all 0.40s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+        }
+
+        .buttonBarra:hover {
+            box-shadow: 0 3px 12px rgba(255, 85, 40, 0.5);
+        }
+
+            .buttonBarra.success span:after, .buttonBarra:hover span:after {
+                content: '';
+                background-color: #2b25a5;
+                width: 2px;
+                height: 70%;
+                position: absolute;
+                top: 15%;
+                right: -1px;
+            }
+
+            .buttonBarra.success .iconBarra, .buttonBarra:hover .iconBarra {
+                width: 28%;
+                right: 0;
+                background-size: 15px;
+                transition: all 0.40s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+            }
+
+                .buttonBarra.success .iconBarra .faBarra, .buttonBarra:hover .iconBarra .faBarra {
+                    line-height: 35px;
+                    font-size: 20px;
+                    vertical-align: middle;
+                }
+
+    .DynamicDialogStyle {
+        background-color: #F7FAFE;
+        font-size: small;
+    }
+</style>

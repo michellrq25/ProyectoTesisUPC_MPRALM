@@ -82,8 +82,6 @@ C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\es\M
 C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.dll
 C:\MICHELL\UPC\ProyectoTesisUPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.pdb
-C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.csproj.AssemblyReference.cache
-C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.csproj.CoreCompileInputs.cache
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\ProyectoTesisUPC_v2.dll.config
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\ProyectoTesisUPC_v2.dll
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\ProyectoTesisUPC_v2.pdb
@@ -171,6 +169,8 @@ C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\e
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.csproj.AssemblyReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.csproj.CoreCompileInputs.cache
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.csproj.CopyComplete
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.dll
 C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\obj\Debug\ProyectoTesisUPC_v2.pdb

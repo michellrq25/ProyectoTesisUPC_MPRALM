@@ -1,0 +1,7 @@
+/build/
+*.suo
+*.user
+bin/
+obj/
+Debug/
+*.bak

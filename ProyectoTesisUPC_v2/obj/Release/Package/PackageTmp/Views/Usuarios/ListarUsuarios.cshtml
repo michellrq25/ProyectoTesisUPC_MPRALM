@@ -1,0 +1,352 @@
+﻿@using ProyectoTesisUPC_v2.Models
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<input id="hdVista" type="hidden" value="0" />
+<input id="hdMensaje" type="text" style="display:none" value="@ViewBag.Message" />
+<input id="hdAlerta" type="hidden" value="@ViewBag.Alerta" />
+
+
+<link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" type="text/css" />
+<div class="modalCrono" id="contenedoPrincipal"></div>
+<div style="height:20px;"></div>
+<div class="panel panel-default" style="align-content:center">
+    <div class="panel-heading">Usuarios: Listado</div>
+    <div class="panel-body">
+        <div class="col-lg-12" style="padding:0px 0px 10px 0px">
+            <div class="form-group">
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        <input style="width:180px" type="text" id="usuario" maxlength="15" class="inptnew form-control dform-control text-box single-line solo-letras-numeros" placeholder=" " />
+                        <span class="label" style="color:black; font-size: 12px">Usuario</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        <input style="width:180px" type="text" id="dniUsuario" maxlength="8" class="inptnew form-control dform-control text-box single-line solo-numero" placeholder=" " />
+                        <span class="label" style="color:black; font-size: 12px">DNI del Usuario</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        @Html.DropDownList("ddlRoles", null, htmlAttributes: new { @id = "ddlRoles", @class = "form-control autotab wrapper-dropdown", style = "width:180px;" })
+                        <span class="label" style="color:black; font-size: 12px">Roles</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+
+                <div class="col-lg-1" style="font-size: 12px; width: 160px;">
+                    <label for="inp" class="inp">
+                        @Html.DropDownList("ddlEstado", null, htmlAttributes: new { @id = "ddlEstado", @class = "form-control autotab wrapper-dropdown", style = "width:180px;" })
+                        <span class="label" style="color:black; font-size: 12px">Estado</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="col-lg-1">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="col-lg-12" style="padding:8px 0px 10px 0px">
+            <div class="form-group">
+
+            </div>
+        </div>
+
+        <div class="col-lg-12" style="padding:10px 0px 0px 0px">
+            <center>
+                <table class="panelMenu">
+                    <tr>
+                        <td id="tdNuevo" style="padding: 0px 10px 0px 0px">
+                            <a class="buttonBarra" href="#" role="button" onclick="mostrar(0);">
+                                <span>Nuevo</span>
+                                <div class="iconBarra IconoNuevo">
+                                    <i class="faBarra fa-remove2"></i>
+                                </div>
+                            </a>
+                        </td>
+                        <td style="padding: 0px 10px 0px 0px">
+                            <a id="lnkListarUsuarios" href="#" class="buttonBarra" role="button">
+                                <span>Buscar</span>
+                                <div class="iconBarra IconoBuscar">
+                                    <i class="faBarra fa-remove2"></i>
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </center>
+        </div>
+        <br /> <br />
+        <div class="col-lg-12" style="padding:0px 0px 10px 0px">
+            <div class="form-group">
+                <div class="block" id="divGrid"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-2">
+                <div class="modal fade align_center" id="verInformacionEmpresa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div id="RegistroObservacionesInformacion"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/Usuarios/ListarUsuariosPrincipal.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            if ($("#usuario").val() != "") {
+                $("#lnkListarUsuarios").click();
+            }
+
+            $(".solo-letras-numeros").keypress(function (event) {
+                try {
+                    var regex = new RegExp("^[a-zA-Z0-9]+$");
+                    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                    if (!regex.test(key)) {
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+                catch (e) {
+                    return;
+                }
+            });
+
+        });
+
+    </script>
+
+    <script>
+        function mostrar(ID_usuario) {
+            $('#verInformacionEmpresa').modal('show');
+            $.ajax({
+                url: "/Usuarios/EditarUsuario",
+                type: 'Get',
+                data: {
+                    idUsuario: ID_usuario
+                },
+                async: true,
+                cache: false,
+                success: function (data) {
+                    $("#RegistroObservacionesInformacion").html(data);
+                },
+                error: function () {
+                    alertValida("Se produjo un error al obtener los datos.");
+                }
+            });
+        };
+        function habilitar_inhabilitar_eliminar(tipo, ID_usuario, Login) {
+
+            $.ajax({
+                url: "/Usuarios/HabilitarInhabilitarEliminar",
+                type: 'Post',
+                data: {
+                    tipo: tipo,
+                    idUsuario: ID_usuario
+                },
+                async: false,
+                cache: false,
+                success: function (data) {
+                    if (data.valida) {
+                        $("#usuario").val(Login);
+
+                        alertValidaOK(data.mensaje);
+                        ListarPorFiltro();
+                    } else {
+                        alertValida("Se produjo un error al realizar la operación.");
+                    }
+                },
+                error: function () {
+                    alertValida("Se produjo un error al realizar la operación. Favor de comunicarse con el Área de TI");
+                }
+            });
+        };
+        function ListarPorFiltro() {
+            $.ajax({
+                url: "/Usuarios/ListarUsuariosPrincipal",
+                type: 'Get',
+                data: {
+                    login: $("#usuario").val(),
+                    DNIUsuario: '',
+                    Rol: '999',
+                    estado: '999'
+                },
+                async: true,
+                cache: false,
+                success: function (data) {
+                    $("#divGrid").html(data);
+                },
+                error: function () {
+                    alertModal("Se produjo un error al obtener los datos.");
+                }
+            });
+        }
+        function alertValida(mensaje) {
+            var $textAndPic = $('<div></div>');
+            $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/iconos/color/icon-warning.png" alt="" style="width: 40px;height: 40px; ></i> ');
+            $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+
+            BootstrapDialog.show({
+                title: 'Mantenimiento de Usuarios',
+                type: BootstrapDialog.TYPE_WARNING,
+                message: $textAndPic,
+                closable: true,
+                buttons: [{
+                    cssClass: 'btn-principal',
+                    label: ' Ok',
+                    icon: 'icono_check',
+                    action: function (dialogRef) {
+                        dialogRef.close();
+                    }
+                }],
+            });
+        }
+
+        function alertValidaOK(mensaje) {
+            var $textAndPic = $('<div></div>');
+            $textAndPic.append(' <i class="icono_alerta_modal"><img src="../Images/check_green.png" alt="" style="width: 40px;height: 40px; ></i> ');
+            $textAndPic.append('<div class="content_texto_modal"><span class="error-msg">' + mensaje + '</span></div>');
+
+            BootstrapDialog.show({
+                title: 'Mantenimiento de Usuarios',
+                type: BootstrapDialog.TYPE_SUCCESS,
+                message: $textAndPic,
+                closable: true,
+                buttons: [{
+                    cssClass: 'btn-principal',
+                    label: ' Ok',
+                    icon: 'icono_check',
+                    action: function (dialogRef) {
+                        dialogRef.close();
+                    }
+                }],
+            });
+        }
+
+    </script>
+}
+<style type="text/css">
+    .IconoNuevo {
+        background: url(../Images/iconos/blanco/icono_nuevo.png) no-repeat;
+        background-position: center;
+        display: inline-block;
+    }
+
+    .IconoBuscar {
+        background: url(../Images/iconos/blanco/icono_buscar.png) no-repeat;
+        background-position: center;
+        display: inline-block;
+    }
+
+    .buttonBarra {
+        font-family: 'Mirai_medium';
+        display: block;
+        background-color: #5f747f;
+        width: 65px;
+        height: 35px;
+        line-height: 40px;
+        margin: auto;
+        color: #fff;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 7px;
+    }
+
+        .buttonBarra span, .buttonBarra .iconBarra {
+            display: block;
+            height: 100%;
+            text-align: center;
+            position: absolute;
+            top: 0;
+        }
+
+        .buttonBarra span {
+            width: 72%;
+            line-height: 50px;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #fff;
+            left: 0;
+            left: -72%;
+            opacity: 0;
+        }
+
+        .buttonBarra .iconBarra {
+            width: 100%;
+            background-size: 18px;
+        }
+
+            .buttonBarra .iconBarra .faBarra {
+                font-size: 30px;
+                line-height: 40px;
+            }
+
+            .buttonBarra .iconBarra .fa-remove2 {
+                height: 35px;
+            }
+
+        .buttonBarra.success span, .buttonBarra:hover span {
+            left: 0%;
+            opacity: 100;
+            line-height: 35px;
+            transition: all 0.40s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+        }
+
+        .buttonBarra:hover {
+            box-shadow: 0 3px 12px rgba(255, 85, 40, 0.5);
+        }
+
+            .buttonBarra.success span:after, .buttonBarra:hover span:after {
+                content: '';
+                background-color: #2b25a5;
+                width: 2px;
+                height: 70%;
+                position: absolute;
+                top: 15%;
+                right: -1px;
+            }
+
+            .buttonBarra.success .iconBarra, .buttonBarra:hover .iconBarra {
+                width: 28%;
+                right: 0;
+                background-size: 15px;
+                transition: all 0.40s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+            }
+
+                .buttonBarra.success .iconBarra .faBarra, .buttonBarra:hover .iconBarra .faBarra {
+                    line-height: 35px;
+                    font-size: 20px;
+                    vertical-align: middle;
+                }
+
+    .DynamicDialogStyle {
+        background-color: #F7FAFE;
+        font-size: small;
+    }
+</style>

@@ -1,0 +1,7 @@
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\bin\Release\UPC.Common.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\bin\Release\UPC.Common.pdb
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\obj\Release\UPC.Common.csproj.AssemblyReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\obj\Release\UPC.Common.csproj.ResolveComReference.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\obj\Release\UPC.Common.csproj.CoreCompileInputs.cache
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\obj\Release\UPC.Common.dll
+C:\MICHELL\UPC\ProyectoTesisUPC_v2\ProyectoTesisUPC_v2\UPC.Common\obj\Release\UPC.Common.pdb
